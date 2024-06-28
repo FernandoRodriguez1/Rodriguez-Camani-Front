@@ -1,0 +1,101 @@
+.ReviewList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.ReviewItem {
+  flex: 0 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #0f172a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ReviewItem p {
+  font-size: 1em;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.ReviewItem:hover {
+  transform: scale(1.05);
+}
+
+.ReviewItem .button-group {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ReviewItem button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  color: white;
+}
+
+.ReviewItem button:hover {
+  opacity: 0.8;
+}
+
+.button-delete {
+  background-color: #dc3545;
+}
+
+.button-comment {
+  background-color: #28a745;
+}
+
+.button-edit {
+  background-color: #007bff;
+}
+
+.ReviewItem form {
+  margin-top: 10px;
+}
+
+.ReviewItem textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 1em;
+}
+
+.ReviewItem form button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.ReviewItem form button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 600px) {
+  .ReviewItem {
+    flex: 0 1 100%;
+  }
+
+  .ReviewItem .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ReviewItem button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,132 @@
+.registro-form-container.dark {
+  background-color: #0f172a;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registro-form-container.dark h2,
+.registro-form-container.dark .form-group label {
+  color: white;
+}
+
+.registro-form-container.dark .input-field {
+  background-color: #0f172a;
+  color: white;
+}
+
+.registro-form-container.light {
+  background-color: rgb(239, 234, 226);
+  color: black;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registro-form-container.light h2,
+.registro-form-container.light .form-group label {
+  color: black;
+}
+
+.registro-form-container.light .input-field {
+  background-color: white;
+  color: black;
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #173cbc;
+  font-size: 1rem;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #1d4ed8;
+}
+
+.button-form:hover,
+.button-form:focus {
+  background-color: #173cbc;
+}
+
+.container-regilogi {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+}
+
+.card-regilogi {
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card-regilogi.flipped {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.link {
+  color: #1d4ed8;
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+
+.link:hover {
+  color: #173cbc;
+}
+@media (max-width: 768px) {
+  .container-regilogi {
+    height: 105vh;
+  }
+}

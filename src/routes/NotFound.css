@@ -1,0 +1,51 @@
+.not-found-container.dark {
+  background-color: #0f172a;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.not-found-container.dark h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.not-found-container.dark h1 a {
+  color: #1d4ed8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.not-found-container.dark h1 a:hover {
+  color: #173cbc;
+}
+
+.not-found-container.light {
+  background-color: rgb(239, 234, 226);
+  color: black;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.not-found-container.light h1 {
+  color: black;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.not-found-container.light h1 a {
+  color: #1d4ed8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.not-found-container.light h1 a:hover {
+  color: #173cbc;
+}

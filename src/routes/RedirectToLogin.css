@@ -1,0 +1,55 @@
+.redirect-tologin-container.dark {
+  background-color: #0f172a;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 65px;
+  margin-bottom: 65px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.redirect-tologin-container.dark h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.redirect-tologin-container.dark h1 a {
+  color: #1d4ed8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.redirect-tologin-container.dark h1 a:hover {
+  color: #173cbc;
+}
+
+.redirect-tologin-container.light {
+  background-color: rgb(239, 234, 226);
+  color: black;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 65px;
+  margin-bottom: 65px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.redirect-tologin-container.light h1 {
+  color: black;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.redirect-tologin-container.light h1 a {
+  color: #1d4ed8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.redirect-tologin-container.light h1 a:hover {
+  color: #173cbc;
+}

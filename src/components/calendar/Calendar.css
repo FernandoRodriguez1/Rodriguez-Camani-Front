@@ -1,0 +1,7 @@
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.react-datepicker__current-month {
+  color: black;
+}
