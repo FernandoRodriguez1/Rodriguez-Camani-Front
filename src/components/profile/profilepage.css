@@ -177,6 +177,43 @@
   border-radius: 10px;
 }
 
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px 0;
+  list-style: none;
+}
+
+.card ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.card ul li {
+  margin-bottom: 8px;
+}
+
+.card ul li:last-child {
+  margin-bottom: 0;
+}
+
+.card .date-time {
+  font-weight: bold;
+  color: #333;
+}
+
+.card .barber {
+  color: #555;
+}
+
+.card .service {
+  color: #777;
+}
+
 @media (max-width: 600px) {
   .card-item {
     margin: 10px;

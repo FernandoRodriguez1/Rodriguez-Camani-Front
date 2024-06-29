@@ -1,35 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ReviewForm from "./ReviewForm";
 
 const UserListsAppointments = ({ appointments = [] }) => {
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
-
-  const toggleReviewForm = (appointmentId) => {
-    setSelectedAppointmentId(appointmentId);
-  };
-
+  console.log(appointments);
   return (
     <ul>
       {appointments.length > 0 ? (
         appointments.map((appointment) => (
           <li key={appointment.id}>
             <ul>
-              <li>Fecha y Hora: {appointment.date}</li>
-              <li>Barbero: {appointment.barber}</li>
-              <li>Tipo de corte: {appointment.type}</li>
               <li>
-                <button onClick={() => toggleReviewForm(appointment.id)}>
-                  Dejar una reseña
-                </button>
+                Fecha y Hora: {appointment.creationDate}
+                {}
               </li>
+              <li>Barbero: {appointment.barberId}</li>
+              <li>Tipo de corte: {appointment.service}</li>
             </ul>
-            {selectedAppointmentId === appointment.id && (
-              <ReviewForm
-                appointmentId={appointment.id}
-                user={appointment.user}
-              />
-            )}
           </li>
         ))
       ) : (

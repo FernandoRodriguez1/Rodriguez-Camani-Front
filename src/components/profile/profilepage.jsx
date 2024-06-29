@@ -8,6 +8,7 @@ import api from "../API/api-hook";
 import { ThemeContext } from "../Theme/ThemeContext";
 import UserListsAppointments from "../appointments/UserAppointment/UserListsAppointment";
 import RedirectToLogin from "../../routes/RedirectToLogin";
+import { Link } from "react-router-dom";
 
 const Profilepage = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -84,11 +85,11 @@ const Profilepage = () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
         const idUser = tokenInfo.sub;
-
         const response = await api.get(
-          `Review/get-reviews-by-userId/${tokenInfo.sub}`
+          `api/Appointment/get-appointment-by-userId/${idUser}`
         );
         setAppointments(response.data);
+        console.log(appointments);
         setLoading(false);
       }
     } catch (err) {
@@ -151,7 +152,30 @@ const Profilepage = () => {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        <UserListsAppointments appointments={appointments} />
+        <ul>
+          {appointments.length > 0 ? (
+            appointments.map((appointment) => (
+              <li key={appointment.id} className="card">
+                <ul>
+                  <li className="date-time">
+                    Fecha y Hora: {appointment.dateTime}
+                    <br />
+                    {appointment.startTime}
+                  </li>
+                  <li className="barber">Barbero: {appointment.barberId}</li>
+                  <li className="service">
+                    Tipo de corte: {appointment.service}
+                  </li>
+                </ul>
+              </li>
+            ))
+          ) : (
+            <h1>
+              Aún no tienes reservas realizadas. Haga su primera reserva{" "}
+              <Link to="/appointment">aquí</Link>!
+            </h1>
+          )}
+        </ul>
       )}
     </div>
   );
