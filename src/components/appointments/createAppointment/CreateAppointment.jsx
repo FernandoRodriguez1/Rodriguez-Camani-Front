@@ -54,6 +54,10 @@ const AppointmentForm = () => {
         setClientId(userId);
         await api.post(`api/Appointment/create-appointment?`, newAppointment);
         alert("Se reservado el turno correctamente.");
+
+        setBarberId("");
+        setHour("");
+        setProduct("");
       }
     } catch (error) {
       alert("Error al reservar turno.");
