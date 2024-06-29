@@ -4,18 +4,31 @@ import { ThemeContext } from "../../Theme/ThemeContext";
 import Calendar from "../../calendar/Calendar";
 import AvailableTimes from "../../calendar/AvaiableTimes";
 import api from "../../API/api-hook";
+import useTokenUser from "../../hooks/useTokenUser";
+import { formatISO, parseISO, format } from "date-fns";
 
 const AppointmentForm = () => {
   const [date, setDate] = useState("");
   const [hour, setHour] = useState("");
   const [product, setProduct] = useState("");
-  const [prepaidment, setPrepaidment] = useState(false);
-  const [appointments, setAppointments] = useState([]);
   const [barberId, setBarberId] = useState("");
+  const [clientId, setClientId] = useState("");
   const [schedules, setSchedules] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableTimes, setAvailableTimes] = useState([]);
   const { theme } = useContext(ThemeContext);
+  const { tokenInfo, error: tokenError } = useTokenUser();
+
+  const newAppointment = {
+    clientId: clientId,
+    barberId: barberId,
+    barberAvailabilityId: 1,
+    service: product,
+    startTime: `${hour}:00`,
+    creationDate: formatISO(new Date(selectedDate)),
+  };
+
+  console.log(newAppointment);
 
   const fetchSchedules = async (barberId) => {
     try {
@@ -34,6 +47,19 @@ const AppointmentForm = () => {
     }
   };
 
+  const CreateAppointment = async () => {
+    try {
+      if (tokenInfo && tokenInfo.sub) {
+        const userId = tokenInfo.sub;
+        setClientId(userId);
+        await api.post(`api/Appointment/create-appointment?`, newAppointment);
+        alert("Se reservado el turno correctamente.");
+      }
+    } catch (error) {
+      alert("Error al reservar turno.");
+    }
+  };
+
   useEffect(() => {
     if (selectedDate && schedules.length > 0) {
       const dayMapping = [6, 0, 1, 2, 3, 4, 5];
@@ -49,31 +75,11 @@ const AppointmentForm = () => {
     }
   }, [selectedDate, schedules]);
 
-  const handleReservarTurno = (e) => {
-    e.preventDefault();
-    const newAppointment = {
-      id: appointments.length + 1,
-      fecha: date,
-      Hora: hour,
-      Producto: product,
-      Seña: prepaidment,
-    };
-    setAppointments([...appointments, newAppointment]);
-    setDate("");
-    setHour("");
-    setProduct("");
-    setPrepaidment(false);
-    SaveOnLocalStorage([...appointments, newAppointment]);
-  };
-
-  const SaveOnLocalStorage = (data) => {
-    try {
-      const jsonData = JSON.stringify(data);
-      localStorage.setItem("appointments", jsonData);
-    } catch (error) {
-      console.error("Error al guardar turno:", error);
+  useEffect(() => {
+    if (tokenInfo) {
+      setClientId(tokenInfo.sub);
     }
-  };
+  }, [tokenInfo]);
 
   const generateTimeSlots = (start, end, interval = 60) => {
     const startTime = new Date(`1970-01-01T${start}Z`);
@@ -158,20 +164,10 @@ const AppointmentForm = () => {
           <option value="Color completo">Color completo ($11000)</option>
         </select>
       </div>
-      <div>
-        <label>
-          <input
-            className="checkbox-field"
-            type="checkbox"
-            checked={prepaidment}
-            onChange={(e) => setPrepaidment(e.target.checked)}
-          />
-          Señar turno
-        </label>
-      </div>
+      <div></div>
       <button
         className="submit-button"
-        onClick={handleReservarTurno}
+        onClick={CreateAppointment}
         disabled={!product}
       >
         Reservar turno
