@@ -3,7 +3,7 @@ import "./ScheduleList.css";
 import { ThemeContext } from "../Theme/ThemeContext";
 import useTokenUser from "../hooks/useTokenUser";
 import api from "../API/api-hook";
-
+import { ToastContainer, toast } from "react-toastify";
 const ScheduleList = () => {
   const { theme } = useContext(ThemeContext);
   const [schedules, setSchedules] = useState([]);
@@ -34,10 +34,10 @@ const ScheduleList = () => {
         const response = await api.delete(
           `/api/BarberSchedules/${barberId}/schedules`
         );
-        alert("Horarios eliminados");
+        toast.success("Horarios eliminados");
       }
     } catch (error) {
-      alert("Error eliminando el horario:", error);
+      toast.error("Error eliminando el horario:", { autoClose: 3000 });
     }
   };
   useEffect(() => {
@@ -70,6 +70,7 @@ const ScheduleList = () => {
           <p>No se encontraron horarios.</p>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

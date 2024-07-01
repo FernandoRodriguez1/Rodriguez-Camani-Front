@@ -27,6 +27,7 @@ import {
 import { ThemeContext } from "./components/Theme/ThemeContext";
 
 import BarberComponent from "./components/barber/BarberComponent";
+import { ToastContainer } from "react-toastify";
 
 const ProtectedElement = ({ element, allowedRoles }) => {
   const { isLoggedIn, roles } = useContext(AuthContext);

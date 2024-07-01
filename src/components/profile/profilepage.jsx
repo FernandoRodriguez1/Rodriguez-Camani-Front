@@ -10,6 +10,8 @@ import UserListsAppointments from "../appointments/UserAppointment/UserListsAppo
 import RedirectToLogin from "../../routes/RedirectToLogin";
 import { Link } from "react-router-dom";
 
+import { toast, ToastContainer } from "react-toastify";
+
 const Profilepage = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const [userData, setUserData] = useState("");
@@ -43,14 +45,20 @@ const Profilepage = () => {
           const userId = tokenInfo.sub;
 
           await api.patch(`/User/change-password?id=${userId}`, requestData);
-          alert("Se ha modificado tu contraseña correctamente.");
+          toast.success("Se ha modificado tu contraseña correctamente.", {
+            autoClose: 3000,
+          });
           setNewPassword("");
         }
       } catch (error) {
-        alert("Hubo un error al modificar tu contraseña.");
+        toast.error("Hubo un error al modificar tu contraseña.", {
+          autoClose: 3000,
+        });
       }
     } else {
-      alert("La contraseña no cumple con todos los requisitos");
+      toast.error("La contraseña no cumple con todos los requisitos", {
+        autoClose: 5000,
+      });
     }
   };
 
@@ -155,15 +163,17 @@ const Profilepage = () => {
         <ul>
           {appointments.length > 0 ? (
             appointments.map((appointment) => (
-              <li key={appointment.id} className="card">
+              <li key={appointment.id} className={`appointments-card ${theme}`}>
                 <ul>
-                  <li className="date-time">
+                  <li className="appointments-date-time">
                     Fecha y Hora: {appointment.dateTime}
                     <br />
                     {appointment.startTime}
                   </li>
-                  <li className="barber">Barbero: {appointment.barberId}</li>
-                  <li className="service">
+                  <li className="appointments-barber">
+                    Barbero: {appointment.barberId}
+                  </li>
+                  <li className="appointments-service">
                     Tipo de corte: {appointment.service}
                   </li>
                 </ul>
@@ -177,6 +187,7 @@ const Profilepage = () => {
           )}
         </ul>
       )}
+      <ToastContainer />
     </div>
   );
 };

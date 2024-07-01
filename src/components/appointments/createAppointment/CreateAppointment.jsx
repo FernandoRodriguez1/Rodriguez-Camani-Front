@@ -6,7 +6,7 @@ import AvailableTimes from "../../calendar/AvaiableTimes";
 import api from "../../API/api-hook";
 import useTokenUser from "../../hooks/useTokenUser";
 import { formatISO, parseISO, format } from "date-fns";
-
+import { ToastContainer, toast } from "react-toastify";
 const AppointmentForm = () => {
   const [date, setDate] = useState("");
   const [hour, setHour] = useState("");
@@ -53,14 +53,16 @@ const AppointmentForm = () => {
         const userId = tokenInfo.sub;
         setClientId(userId);
         await api.post(`api/Appointment/create-appointment?`, newAppointment);
-        alert("Se reservado el turno correctamente.");
+        toast.success("Se reservado el turno correctamente.", {
+          autoClose: 3000,
+        });
 
         setBarberId("");
         setHour("");
         setProduct("");
       }
     } catch (error) {
-      alert("Error al reservar turno.");
+      toast.error("Error al reservar turno.");
     }
   };
 
@@ -176,6 +178,7 @@ const AppointmentForm = () => {
       >
         Reservar turno
       </button>
+      <ToastContainer />
     </div>
   );
 };

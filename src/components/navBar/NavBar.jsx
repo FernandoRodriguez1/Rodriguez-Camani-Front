@@ -4,6 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import ToggleTheme from "../ui/ToggleTheme";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import logo from "./../Photos/Tegobi´s.png";
+import logoDark from "./../Photos/Tegobi´sDark.png";
 const NavBar = ({ theme }) => {
   const { isLoggedIn, roles } = useContext(AuthContext);
   const { logout } = useContext(AuthContext);
@@ -11,7 +13,11 @@ const NavBar = ({ theme }) => {
   return (
     <nav className={`navbar ${theme}`}>
       <Link to="/" className="title">
-        TegoBis
+        {theme === "light" ? (
+          <img src={logo} alt="" height="70px" width="100px" />
+        ) : (
+          <img src={logoDark} alt="" height="70px" width="100px" />
+        )}
       </Link>
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
         <span></span>

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import api from "../API/api-hook";
 import { jwtDecode } from "jwt-decode";
 
@@ -39,12 +39,14 @@ const AuthProvider = ({ children }) => {
 
       toast.success("Inicio de sesión exitoso.", {
         position: "bottom-left",
+        autoClose: 3000,
       });
 
       return { success: true };
     } catch (error) {
       toast.error("Error al iniciar sesión.", {
         position: "bottom-left",
+        autoClose: 3000,
       });
 
       return { success: false, message: error.message };
@@ -61,6 +63,7 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, roles }}>
       {children}
+      <ToastContainer />
     </AuthContext.Provider>
   );
 };

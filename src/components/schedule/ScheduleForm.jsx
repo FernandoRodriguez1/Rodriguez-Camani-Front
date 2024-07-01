@@ -3,6 +3,7 @@ import "./ScheduleForm.css";
 import { ThemeContext } from "../Theme/ThemeContext";
 import api from "../API/api-hook";
 import useTokenUser from "../hooks/useTokenUser";
+import { ToastContainer, toast } from "react-toastify";
 
 const daysOfWeek = [
   { name: "Tuesday", index: 1 },
@@ -56,9 +57,9 @@ const ScheduleForm = () => {
         barberScheduleDTO
       );
 
-      alert("Horario Creado con exito");
+      toast.success("Horario Creado con exito", { autoClose: 3000 });
     } catch (error) {
-      alert("No se pudo crear el horario:", error);
+      toast.error("No se pudo crear el horario:", { autoClose: 3000 });
     }
   };
 
@@ -112,6 +113,7 @@ const ScheduleForm = () => {
           Enviar
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
