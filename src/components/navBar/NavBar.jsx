@@ -6,6 +6,7 @@ import ToggleTheme from "../ui/ToggleTheme";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import logo from "./../Photos/Tegobi´s.png";
 import logoDark from "./../Photos/Tegobi´sDark.png";
+
 const NavBar = ({ theme }) => {
   const { isLoggedIn, roles } = useContext(AuthContext);
   const { logout } = useContext(AuthContext);
@@ -40,6 +41,14 @@ const NavBar = ({ theme }) => {
         ) : (
           ""
         )}
+        {roles == "Barber" ? (
+          <li>
+            <NavLink to="/barber-appointment">Mis turnos</NavLink>
+          </li>
+        ) : (
+          ""
+        )}
+
         <li>
           <NavLink to="/">Nosotros</NavLink>
         </li>
@@ -50,12 +59,18 @@ const NavBar = ({ theme }) => {
         ) : (
           ""
         )}
-        <li>
-          <NavLink to="/appointment">Turnos</NavLink>
-        </li>
+        {roles == "Client" ? (
+          <li>
+            <NavLink to="/appointment">Turnos</NavLink>
+          </li>
+        ) : (
+          ""
+        )}
+
         <li>
           <NavLink to="/reviews">Reseñas</NavLink>
         </li>
+
         {isLoggedIn ? (
           <button className={`button-navbar-logout ${theme}`} onClick={logout}>
             Cerrar Sesion

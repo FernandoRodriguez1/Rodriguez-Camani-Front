@@ -15,7 +15,10 @@ const Footer = ({ theme }) => {
           <div className="col-md-6">
             <div className="footer-section">
               <span className="footer-title">Encontranos en:</span>
-              <a href="#" className="social-link">
+              <a
+                href="https://es-la.facebook.com/UniversidadTecnologicaNacional"
+                className="social-link"
+              >
                 <FontAwesomeIcon
                   icon={faFacebook}
                   className="social-icon mr-3"
@@ -23,7 +26,7 @@ const Footer = ({ theme }) => {
                 />
                 <span className="social-name">Facebook</span>
               </a>
-              <a href="#" className="social-link">
+              <a href="https://x.com/elonmusk" className="social-link">
                 <FontAwesomeIcon
                   icon={faTwitter}
                   className="social-icon mr-3"
@@ -31,7 +34,10 @@ const Footer = ({ theme }) => {
                 />
                 <span className="social-name">Twitter</span>
               </a>
-              <a href="#" className="social-link">
+              <a
+                href="https://www.instagram.com/gradienteUTN/"
+                className="social-link"
+              >
                 <FontAwesomeIcon
                   icon={faInstagram}
                   className="social-icon mr-3"

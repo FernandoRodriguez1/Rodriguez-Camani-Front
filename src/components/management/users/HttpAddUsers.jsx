@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../../API/api-hook";
+import { toast } from "react-toastify";
 
 const useAddUser = () => {
   const [username, setUsername] = useState("");
@@ -20,7 +21,7 @@ const useAddUser = () => {
 
     try {
       await api.post("User/add-user", userData);
-      alert("Usuario agregado exitosamente.");
+      toast.success("Usuario agregado exitosamente.");
       setUsername("");
       setAge("");
       setEmail("");
@@ -28,7 +29,7 @@ const useAddUser = () => {
       setPhonenumber("");
     } catch (error) {
       setError(error);
-      alert("Hubo un error al agregar el usuario.");
+      toast.error("Hubo un error al agregar el usuario.");
     }
   };
 

@@ -1,6 +1,4 @@
 import "./ReviewList.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { ThemeContext } from "../../Theme/ThemeContext";
 import React, { useEffect, useState, useContext } from "react";
 import useTokenUser from "../../hooks/useTokenUser";
@@ -30,14 +28,13 @@ const ReviewList = () => {
       if (tokenInfo && tokenInfo.sub) {
         const userId = tokenInfo.sub;
         setAdmin(userId);
+      }
 
-        const response = await api.get(`Review/get-reviews`);
-        if (response.data) {
-          setReviews(response.data);
-          console.log(response.data);
-        } else {
-          setReviews([]);
-        }
+      const response = await api.get(`Review/get-reviews`);
+      if (response.data) {
+        setReviews(response.data);
+      } else {
+        setReviews([]);
       }
     } catch (error) {
       console.error("Error obteniendo reseñas:", error);
@@ -46,9 +43,7 @@ const ReviewList = () => {
   };
 
   useEffect(() => {
-    if (tokenInfo) {
-      fetchReviews();
-    }
+    fetchReviews();
   }, [tokenInfo]);
 
   return (
@@ -70,7 +65,7 @@ const ReviewList = () => {
               </div>
             ))
           ) : (
-            <p>No hay hechas.</p>
+            <p className="review-description">No hay hechas.</p>
           )}
         </div>
       )}

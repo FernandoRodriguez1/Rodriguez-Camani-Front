@@ -5,10 +5,10 @@ import Calendar from "../../calendar/Calendar";
 import AvailableTimes from "../../calendar/AvaiableTimes";
 import api from "../../API/api-hook";
 import useTokenUser from "../../hooks/useTokenUser";
-import { formatISO, parseISO, format } from "date-fns";
+import { formatISO } from "date-fns";
 import { ToastContainer, toast } from "react-toastify";
+
 const AppointmentForm = () => {
-  const [date, setDate] = useState("");
   const [hour, setHour] = useState("");
   const [product, setProduct] = useState("");
   const [barberId, setBarberId] = useState("");
@@ -27,8 +27,6 @@ const AppointmentForm = () => {
     startTime: `${hour}:00`,
     creationDate: formatISO(new Date(selectedDate)),
   };
-
-  console.log(newAppointment);
 
   const fetchSchedules = async (barberId) => {
     try {

@@ -21,6 +21,8 @@ const ScheduleForm = () => {
     acc[day.name] = { startTime: "09:00", endTime: "17:00", isAvailable: true };
     return acc;
   }, {});
+  // Setiamos el initialSchedule, que por defecto tendrá todos los dias disponible
+  // en un horario de 9am a 17pm
 
   const [schedule, setSchedule] = useState(initialSchedule);
 
@@ -32,6 +34,7 @@ const ScheduleForm = () => {
         [field]: value,
       },
     });
+    //Guarda los horarios por dia y valor de horas y disponibilidad
   };
 
   const handleSubmit = async (event) => {

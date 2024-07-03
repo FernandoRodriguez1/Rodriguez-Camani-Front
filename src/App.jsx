@@ -27,8 +27,8 @@ import {
 import { ThemeContext } from "./components/Theme/ThemeContext";
 
 import BarberComponent from "./components/barber/BarberComponent";
-import { ToastContainer } from "react-toastify";
 import ReviewForm from "./components/appointments/UserAppointment/ReviewForm";
+import BarberAppointmentList from "./components/barber/barber-appointments/Barber-Appointments";
 
 const ProtectedElement = ({ element, allowedRoles }) => {
   const { isLoggedIn, roles } = useContext(AuthContext);
@@ -108,11 +108,20 @@ const App = () => {
           ),
         },
         {
-          path: "/review-form/:appointmentId/:userId",
+          path: "/review-form",
           element: (
             <ProtectedElement
               element={<ReviewForm />}
               allowedRoles={["Client"]}
+            />
+          ),
+        },
+        {
+          path: "/barber-appointment",
+          element: (
+            <ProtectedElement
+              element={<BarberAppointmentList />}
+              allowedRoles={["Barber"]}
             />
           ),
         },

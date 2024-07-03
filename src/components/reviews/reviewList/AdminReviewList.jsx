@@ -10,6 +10,7 @@ const AdminReviewList = () => {
   const { theme } = useContext(ThemeContext);
   const [reviews, setReviews] = useState([]);
   const { tokenInfo, error: tokenError } = useTokenUser();
+
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
     return date.toLocaleDateString("es-ES", {
@@ -27,7 +28,6 @@ const AdminReviewList = () => {
         const response = await api.get(`Review/get-reviews`);
         if (response.data) {
           setReviews(response.data);
-          console.log(reviews);
         } else {
           setReviews([]);
         }

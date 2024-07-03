@@ -4,9 +4,10 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../Theme/ThemeContext";
 import Register from "../register/Register";
+import { ToastContainer } from "react-toastify";
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLoginComponent, setIsLoginComponent] = useState(true);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,7 +28,7 @@ const Login = () => {
 
   return (
     <div className={`container-regilogi ${theme}`}>
-      <div className={`card-regilogi ${isLogin ? "" : "flipped"}`}>
+      <div className={`card-regilogi ${isLoginComponent ? "" : "flipped"}`}>
         <div className="front">
           <div className={`registro-form-container ${theme}`}>
             <form onSubmit={handleLogin} className="registro-form">
@@ -59,14 +60,18 @@ const Login = () => {
                   Error: No se ha podido iniciar sesión.
                 </div>
               )}
-              <button type="submit" className="button-form">
+              <button
+                type="submit"
+                className="button-form"
+                data-testid="login-button"
+              >
                 Iniciar sesión
               </button>
               <p>
                 ¿No tienes una cuenta?{" "}
                 <button
                   type="button"
-                  onClick={() => setIsLogin(false)}
+                  onClick={() => setIsLoginComponent(false)}
                   className="link"
                 >
                   Registrarse
@@ -81,7 +86,7 @@ const Login = () => {
             ¿Ya tienes una cuenta?{" "}
             <button
               type="button"
-              onClick={() => setIsLogin(true)}
+              onClick={() => setIsLoginComponent(true)}
               className="link"
             >
               Iniciar sesión
@@ -89,6 +94,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

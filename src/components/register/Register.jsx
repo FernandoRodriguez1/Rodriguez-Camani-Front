@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import "./Register.css";
 import { ThemeContext } from "../Theme/ThemeContext";
 import useAddUser from "../management/users/HttpAddUsers";
+import { ToastContainer } from "react-toastify";
 
 const Register = () => {
   const { theme, setTheme } = useContext(ThemeContext);

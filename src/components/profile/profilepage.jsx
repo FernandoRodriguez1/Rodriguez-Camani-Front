@@ -1,20 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import "./profilepage.css";
 
-import { AuthContext } from "../AuthProvider/AuthProvider";
 import useTokenUser from "../hooks/useTokenUser";
 import api from "../API/api-hook";
 
 import { ThemeContext } from "../Theme/ThemeContext";
 
 import RedirectToLogin from "../../routes/RedirectToLogin";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
 import ReviewForm from "../appointments/UserAppointment/ReviewForm";
 
 const Profilepage = () => {
-  const { isLoggedIn } = useContext(AuthContext);
   const [userData, setUserData] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [appointments, setAppointments] = useState([]);
@@ -101,7 +99,6 @@ const Profilepage = () => {
           `api/Appointment/get-appointment-by-userId/${idUser}`
         );
         setAppointments(response.data);
-        console.log(appointments);
         setLoading(false);
       }
     } catch (err) {

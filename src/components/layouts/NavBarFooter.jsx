@@ -1,4 +1,3 @@
-// NavBarFooter.jsx
 import React, { useContext } from "react";
 import { ThemeContext } from "../Theme/ThemeContext";
 import NavBar from "../navBar/NavBar";

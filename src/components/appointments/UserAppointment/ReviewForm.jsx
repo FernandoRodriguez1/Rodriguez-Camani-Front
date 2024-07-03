@@ -12,9 +12,7 @@ const ReviewForm = ({ clientId, userName, service, appointmentId }) => {
     e.preventDefault();
     await addReviewPost();
   };
-  console.log(userName);
-  console.log(clientId);
-  console.log(service);
+
   const addReviewPost = async () => {
     const dateTime = new Date().toISOString();
     const reviewData = {
@@ -26,7 +24,6 @@ const ReviewForm = ({ clientId, userName, service, appointmentId }) => {
       creationDate: dateTime,
       service: service,
     };
-
     try {
       await api.post(`Review/add-review?idTurno=${appointmentId}`, reviewData);
       toast.success(

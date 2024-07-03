@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useAddBarber from "./HttpAddBarber";
 import "./AddBarberForm.css";
 
@@ -29,7 +29,7 @@ const AddBarberForm = () => {
             <input
               className="input-field-userform"
               type="text"
-              id="add-username"
+              id="add-username-barber"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -38,7 +38,7 @@ const AddBarberForm = () => {
             <input
               className="input-field-userform"
               type="email"
-              id="add-email"
+              id="add-email-barber"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -49,7 +49,7 @@ const AddBarberForm = () => {
             <input
               className="input-field-userform"
               type="password"
-              id="add-password"
+              id="add-password-barber"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

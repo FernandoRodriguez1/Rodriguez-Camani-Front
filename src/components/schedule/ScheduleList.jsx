@@ -62,7 +62,12 @@ const ScheduleList = () => {
                     <p>Disponible: {slot.isAvailable ? "Sí" : "No"}</p>
                   </div>
                 ))}
-                <button onClick={handleDeleteSchedule}>Eliminar Horario</button>
+                <button
+                  className="delete-button"
+                  onClick={handleDeleteSchedule}
+                >
+                  Eliminar Horario
+                </button>
               </div>
             </div>
           ))
