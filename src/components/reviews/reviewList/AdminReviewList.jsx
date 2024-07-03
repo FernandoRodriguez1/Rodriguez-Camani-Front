@@ -10,13 +10,24 @@ const AdminReviewList = () => {
   const { theme } = useContext(ThemeContext);
   const [reviews, setReviews] = useState([]);
   const { tokenInfo, error: tokenError } = useTokenUser();
-
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleDateString("es-ES", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  };
   const fetchAllReviews = async () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
         const response = await api.get(`Review/get-reviews`);
         if (response.data) {
           setReviews(response.data);
+          console.log(reviews);
         } else {
           setReviews([]);
         }
@@ -37,32 +48,35 @@ const AdminReviewList = () => {
   };
 
   useEffect(() => {
-    fetchAllReviews();
-  }, []);
+    if (tokenInfo) {
+      fetchAllReviews();
+    }
+  }, [tokenInfo]);
 
   return (
-    <div className="ReviewList">
-      <h1>ADMIN VIEW</h1>
-      <div className="ReviewItem">
-        {reviews.length > 0 ? (
-          reviews.map((review, index) => (
-            <div key={index} className="review">
-              <p>{review.ClientUsername}</p>
-              <p>{review.CreationDate}</p>
-              <p>{review.ClientComment}</p>
-              <p>{review.AppointmentId}</p>
-              <button
-                onClick={() => handleDelete(review.reviewId)}
-                className="button-delete"
-              >
-                <FontAwesomeIcon icon={faXmark} />
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>No hay reviews hechas.</p>
-        )}
-      </div>
+    <div className={`ReviewItem ${theme}`}>
+      {reviews.length > 0 ? (
+        reviews.map((review, index) => (
+          <div key={index} className="review">
+            <button
+              onClick={() => handleDelete(review.reviewId)}
+              className="button-delete"
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+            <p className="review-description">Cliente: {review.userName}</p>
+            <p className="review-date">
+              Fecha de Creación: {formatDate(review.creationDate)}
+            </p>
+            <p className="review-description">
+              Descripcion: {review.description}
+            </p>
+            <div className={`divider ${theme}`}></div>
+          </div>
+        ))
+      ) : (
+        <p>No hay reviews hechas.</p>
+      )}
     </div>
   );
 };

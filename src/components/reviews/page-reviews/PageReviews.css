@@ -7,6 +7,11 @@
 
 .PageReviews h1 {
   font-size: 2em;
-  color: #333;
   text-align: center;
+}
+.PageReviews.dark {
+  color: #fff;
+}
+.PageReviews.light {
+  color: black;
 }

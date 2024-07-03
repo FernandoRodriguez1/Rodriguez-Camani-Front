@@ -5,6 +5,15 @@
   justify-content: center;
 }
 
+.divider.dark {
+  border-bottom: 1px solid #ffffff;
+  margin: 20px 0;
+}
+.divider.light {
+  border-bottom: 1px solid #000;
+  margin: 20px 0;
+}
+
 .ReviewItem {
   flex: 0 1 calc(33.333% - 20px);
   box-sizing: border-box;
@@ -13,8 +22,29 @@
   border-radius: 8px;
   background-color: #0f172a;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.ReviewItem.light {
+  background-color: rgb(239, 234, 226);
+  color: black;
+}
+.ReviewItem.dark {
+  background-color: #0f172a;
+  color: #fff;
+}
+.ReviewItem.dark .review-description {
+  color: #fff;
 }
 
+.ReviewItem.dark .review-date {
+  color: #fff;
+}
+.ReviewItem.light .review-description {
+  color: #000;
+}
+.ReviewItem.light .review-date {
+  color: #000;
+}
 .ReviewItem p {
   font-size: 1em;
   color: #fff;
@@ -25,36 +55,21 @@
   transform: scale(1.05);
 }
 
-.ReviewItem .button-group {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.ReviewItem button {
-  padding: 8px 12px;
+.ReviewItem .button-delete {
+  padding: 8px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
-  color: white;
+  color: #fff;
+  background-color: #dc3545;
+  position: absolute;
+
+  right: 10px;
 }
 
 .ReviewItem button:hover {
   opacity: 0.8;
-}
-
-.button-delete {
-  background-color: #dc3545;
-}
-
-.button-comment {
-  background-color: #28a745;
-}
-
-.button-edit {
-  background-color: #007bff;
 }
 
 .ReviewItem form {

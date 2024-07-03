@@ -122,8 +122,7 @@ const AppointmentForm = () => {
           }}
         >
           <option value="">Seleccione un barbero</option>
-          <option value="1">Barbero 1</option>
-          <option value="2">Barbero 2</option>
+          <option value="2">Barbero 1</option>
         </select>
       </div>
       <div>

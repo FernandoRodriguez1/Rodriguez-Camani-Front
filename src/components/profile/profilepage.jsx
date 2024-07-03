@@ -6,11 +6,12 @@ import useTokenUser from "../hooks/useTokenUser";
 import api from "../API/api-hook";
 
 import { ThemeContext } from "../Theme/ThemeContext";
-import UserListsAppointments from "../appointments/UserAppointment/UserListsAppointment";
+
 import RedirectToLogin from "../../routes/RedirectToLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
+import ReviewForm from "../appointments/UserAppointment/ReviewForm";
 
 const Profilepage = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -19,7 +20,8 @@ const Profilepage = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [userName, setUserName] = useState("");
+  const [showReviewForm, setShowReviewForm] = useState(false);
   const { tokenInfo, error: tokenError } = useTokenUser();
   const [validations, setValidations] = useState({
     minLength: false,
@@ -79,7 +81,8 @@ const Profilepage = () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
         const userId = tokenInfo.sub;
-
+        const name = tokenInfo.username;
+        setUserName(name);
         const response = await api.get(`/User/get-user?id=${userId}`);
         setUserData(response.data);
       }
@@ -93,6 +96,7 @@ const Profilepage = () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
         const idUser = tokenInfo.sub;
+
         const response = await api.get(
           `api/Appointment/get-appointment-by-userId/${idUser}`
         );
@@ -105,6 +109,10 @@ const Profilepage = () => {
       setLoading(false);
       console.error("Error fetching appointments:", err);
     }
+  };
+
+  const handlePostReview = () => {
+    setShowReviewForm(true);
   };
 
   useEffect(() => {
@@ -163,7 +171,10 @@ const Profilepage = () => {
         <ul>
           {appointments.length > 0 ? (
             appointments.map((appointment) => (
-              <li key={appointment.id} className={`appointments-card ${theme}`}>
+              <li
+                key={appointment.appointmentId}
+                className={`appointments-card ${theme}`}
+              >
                 <ul>
                   <li className="appointments-date-time">
                     Fecha y Hora: {appointment.dateTime}
@@ -176,6 +187,25 @@ const Profilepage = () => {
                   <li className="appointments-service">
                     Tipo de corte: {appointment.service}
                   </li>
+                  {!appointment.reviewId ? (
+                    <button
+                      className="submit-review-button"
+                      onClick={handlePostReview}
+                    >
+                      DEJA TU REVIEW
+                    </button>
+                  ) : (
+                    ""
+                  )}
+
+                  {showReviewForm && (
+                    <ReviewForm
+                      userName={userName}
+                      clientId={appointment.clientId}
+                      service={appointment.service}
+                      appointmentId={appointment.appointmentId}
+                    />
+                  )}
                 </ul>
               </li>
             ))
@@ -187,6 +217,7 @@ const Profilepage = () => {
           )}
         </ul>
       )}
+
       <ToastContainer />
     </div>
   );

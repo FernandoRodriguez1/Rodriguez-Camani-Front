@@ -232,6 +232,15 @@
 .appointments-card.dark .appointments-service {
   color: #fff;
 }
+.submit-review-button {
+  background-color: #007bff;
+  color: #fff;
+  width: max-content;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 @media (max-width: 600px) {
   .appointments-card-item {

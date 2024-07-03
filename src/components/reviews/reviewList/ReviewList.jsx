@@ -13,17 +13,28 @@ const ReviewList = () => {
   const { tokenInfo, error: tokenError } = useTokenUser();
   const [admin, setAdmin] = useState("");
 
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleDateString("es-ES", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  };
+
   const fetchReviews = async () => {
     try {
       if (tokenInfo && tokenInfo.sub) {
         const userId = tokenInfo.sub;
         setAdmin(userId);
 
-        const response = await api.get(
-          `Review/get-reviews-by-userId/${userId}`
-        );
+        const response = await api.get(`Review/get-reviews`);
         if (response.data) {
           setReviews(response.data);
+          console.log(response.data);
         } else {
           setReviews([]);
         }
@@ -34,10 +45,6 @@ const ReviewList = () => {
     }
   };
 
-  const handleDelete = () => {
-    // Implementación para borrar una reseña
-  };
-
   useEffect(() => {
     if (tokenInfo) {
       fetchReviews();
@@ -45,23 +52,25 @@ const ReviewList = () => {
   }, [tokenInfo]);
 
   return (
-    <div className="ReviewList">
+    <div className={`ReviewList ${theme}`}>
       {admin === "1" ? (
-        <AdminReviewList />
+        <AdminReviewList reviews={reviews} />
       ) : (
-        <div className="ReviewItem">
+        <div className={`ReviewItem ${theme}`}>
           {reviews.length > 0 ? (
             reviews.map((review, index) => (
               <div key={index} className="review">
-                <p>{review.Description}</p>
-                <p>{review.CreationDate}</p>
-                <button onClick={handleDelete} className="button-delete">
-                  <FontAwesomeIcon icon={faXmark} />
-                </button>
+                <p className="review-description">
+                  Descripcion: {review.description}
+                </p>
+                <p className="review-date">
+                  Fecha de Creación: {formatDate(review.creationDate)}
+                </p>
+                <div className={`divider ${theme}`}></div>
               </div>
             ))
           ) : (
-            <p>No tienes reviews hechas.</p>
+            <p>No hay hechas.</p>
           )}
         </div>
       )}
